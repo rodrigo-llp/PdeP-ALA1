@@ -1,30 +1,37 @@
 const readlineSync = require('readline-sync');
 
 const operador = readlineSync.question('Ingrese la operación deseada (+, -, *, /): ');
-const num1 = Number(readlineSync.question('Ingrese el primer número: '));
-const num2 = Number(readlineSync.question('Ingrese el segundo número: '));
+const cantidad = Number(readlineSync.question('¿Cuántos operandos desea ingresar?'));
 
-console.log('Operador ingresado:', operador);
-console.log('Primer número:', num1);
-console.log('Segundo número:', num2);
+let operandos = [];
 
-let resultado;
+for(let i = 0; i < cantidad; i++){ 
+    const numero = Number(readlineSync.question(`Ingrese el operando ${i + 1}: `));
+    //El template `${...}` permite insertar el calor de una variable dentro del texto
+    operandos.push(numero);
+    //.push() agrega el número al final del array "operandos"
+}
 
-switch (operador){
-    case '+':
-        resultado = num1 + num2;
-        break;
-    case '-':
-        resultado = num1 - num2;
-        break;
-    case '*':
-        resultado = num1 * num2;
-        break;
-    case '/':
-        resultado = num1 / num2;
-        break;
-    default:
-        console.log('Operacion no valida');
+let resultado = operandos[0];
+
+//El for recorre el array (desde la posicion 1) aplicando la operación acumulada
+for(let i = 1; i < operandos.length; i++){
+    switch (operador){
+        case '+':
+            resultado = resultado + operandos[i];
+            break;
+        case '-':
+            resultado = resultado - operandos[i];
+            break;
+        case '*':
+            resultado = resultado * operandos[i];
+            break;
+        case '/':
+            resultado = resultado / operandos[i];
+            break;
+        default:
+            console.log('Operacion no valida');
+    }
 }
 
 console.log('Resultado: ', resultado);
